@@ -2,6 +2,11 @@ package com.danshima.savemyq.data
 
 import android.content.Context
 import androidx.databinding.adapters.Converters
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.danshima.savemyq.data.dao.FeedDao
 import com.danshima.savemyq.data.dao.SavingGoalDao
 import com.danshima.savemyq.data.dao.SavingRuleDao
@@ -18,26 +23,22 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun feedDao(): FeedDao
 
     companion object {
-
         // For Singleton instantiation
-        @Volatile private var instance: AppDatabase? = null
-
-        fun getInstance(context: Context): AppDatabase {
-            return instance ?: synchronized(this) {
-                instance ?: buildDatabase(context).also { instance = it }
+        @Volatile private var INSTANCE: AppDatabase? = null
+        fun getDatabase(context: Context): AppDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
             }
-        }
-
-        private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, "saving_database")
-                .addCallback(object : RoomDatabase.Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-                        WorkManager.getInstance(context).enqueue(request)
-                    }
-                })
-                .build()
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "Word_database"
+                ).build()
+                INSTANCE = instance
+                return instance
+            }
         }
     }
 }
