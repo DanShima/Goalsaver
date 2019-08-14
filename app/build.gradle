@@ -54,10 +54,11 @@ dependencies {
     implementation "com.squareup.moshi:moshi:$version_moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
     // Glide
-    implementation "com.github.bumptech.glide:glide:3.7.0"
+    implementation "com.github.bumptech.glide:glide:4.9.0"
     // Rxjava
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     // RxJava support for Room
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
 
