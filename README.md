@@ -5,10 +5,10 @@
  Each goal has one entry in the list displaying the goals image, an optional target amount and how much has been saved. See provided image.
 
 
- -[] Kotlin
- -[] Rxjava
- -[] Room
- -[] Databinding
- -[] Unit tests (+ UI tests)
+ -[ ] Kotlin
+ -[ ] Rxjava
+ -[ ] Room
+ -[ ] Databinding
+ -[ ] Unit tests (+ UI tests)
 
 
