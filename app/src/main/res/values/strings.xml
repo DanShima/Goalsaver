@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">goalsaver</string>
+    <string name="null_target">$%.0f</string>
+    <string name="out_of_total">$%.0f of %.0f</string>
 </resources>
