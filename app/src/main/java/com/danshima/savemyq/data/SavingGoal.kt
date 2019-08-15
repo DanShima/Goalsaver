@@ -1,6 +1,7 @@
 package com.danshima.savemyq.data
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
@@ -25,9 +26,11 @@ data class SavingGoal(
     val userId: Int,
     val targetAmount: Float? = null,
     val currentBalance: Float,
-    val created: List<Int>,
+    @Ignore val created: List<Int>,
     val status: String,
     val name: String,
     @PrimaryKey val id: Int,
-    val connectedUsers: List<Int>
+    @Ignore val connectedUsers: List<Int>
 )
+
+//TODO: need type converter for the Lists

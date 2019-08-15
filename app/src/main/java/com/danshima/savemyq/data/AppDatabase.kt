@@ -16,7 +16,6 @@ import com.danshima.savemyq.data.dao.SavingRuleDao
  * The Room database for this app
  */
 @Database(entities = [SavingGoal::class, SavingRule::class, Feed::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun savingRuleDao(): SavingRuleDao
     abstract fun savingGoalDao(): SavingGoalDao
@@ -26,18 +25,14 @@ abstract class AppDatabase : RoomDatabase() {
         // For Singleton instantiation
         @Volatile private var INSTANCE: AppDatabase? = null
         fun getDatabase(context: Context): AppDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
+            return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "Word_database"
-                ).build()
+                    "goal_database")
+                    .build()
                 INSTANCE = instance
-                return instance
+                instance
             }
         }
     }
