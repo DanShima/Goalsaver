@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="feed" type="com.danshima.savemyq.data.Feed"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:id="@+id/feed_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            app:bindHtmlString="@{feed.message}"
+            app:fontFamily="BentonSans-Regular"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/feed_amount"
+            tools:text="You made a round up"/>
+
+
+        <ImageView
+            android:id="@+id/feed_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            tools:src="@drawable/ic_round_up"
+            tools:background="@color/colorBackground"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toTopOf="@+id/feed_timestamp"
+            app:layout_constraintStart_toStartOf="@+id/feed_title"
+            app:layout_constraintBottom_toBottomOf="@+id/feed_timestamp"
+            android:contentDescription="@{feed.type}"
+            app:bindFeedIcon="@{feed.type}"
+            />
+
+        <TextView
+            android:id="@+id/feed_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_margin="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/feed_title"
+            app:layout_constraintStart_toEndOf="@+id/feed_icon"
+            app:bindTimestamp="@{feed.timestamp}"
+            tools:text="2h ago"
+            android:layout_marginTop="8dp"/>
+
+        <ImageView
+            android:id="@+id/dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_circle"
+            app:layout_constraintStart_toEndOf="@+id/feed_timestamp"
+            android:contentDescription="@null"
+            app:layout_constraintTop_toTopOf="@+id/feed_timestamp"
+            app:layout_constraintBottom_toBottomOf="@+id/feed_timestamp"
+            android:layout_marginStart="4dp"/>
+
+        <TextView
+            android:id="@+id/feed_spent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            tools:text="$56.60 Best Buy"
+            app:layout_constraintStart_toEndOf="@+id/dot"
+            app:layout_constraintTop_toBottomOf="@+id/feed_title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/feed_amount"
+            android:textSize="18sp"
+            android:textColor="@color/colorGreen"
+            android:gravity="end"
+            android:layout_marginEnd="16dp"
+            app:bindAmount="@{feed.amount}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="$10.00"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

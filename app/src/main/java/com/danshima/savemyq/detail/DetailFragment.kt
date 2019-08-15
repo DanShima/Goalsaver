@@ -1,11 +1,10 @@
 package com.danshima.savemyq.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.danshima.savemyq.R
 import com.danshima.savemyq.databinding.FragmentDetailBinding
 
 
@@ -24,5 +23,13 @@ class DetailFragment : Fragment() {
         binding.lifecycleOwner = this
         //binding.viewModel = viewModel
         return binding.root
+    }
+
+    /**
+     * Inflates the overflow menu that contains filtering options.
+     */
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.overflow_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
