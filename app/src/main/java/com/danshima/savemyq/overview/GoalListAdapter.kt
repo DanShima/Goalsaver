@@ -1,5 +1,6 @@
 package com.danshima.savemyq.overview
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -19,7 +20,10 @@ class GoalListAdapter(val clickListener: ItemClickListener<SavingGoal>) : ListAd
     ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.bind(R.layout.grid_view_item))
+        return ViewHolder(
+            GridViewItemBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false)
+            )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
