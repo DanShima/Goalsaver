@@ -1,14 +1,17 @@
 # Goalsaver
 
- A simplified version of the user's list of savings goals, the list that the user sees when opening the app.
- This list should be displayed as the provided image shows.
- Each goal has one entry in the list displaying the goals image, an optional target amount and how much has been saved. See provided image.
-
-
+ A simple app that shows a list of savings goals and details of each goal.
+ 
 - [x] Kotlin
 - [x] Rxjava
 - [x] Room
 - [x] Databinding
+- [x] Dagger for dependency injection
 - [ ] Unit tests (+ UI tests)
+
+## Architecture
+Inspiration and some sample code taken from https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample/app/src/main/java/com/android/example/github
+Android Kotlin Fundamentals 08 CodeLab
+
 
 
