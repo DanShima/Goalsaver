@@ -1,40 +1,81 @@
 package com.danshima.savemyq.overview
+
+
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.danshima.savemyq.R
 import com.danshima.savemyq.databinding.FragmentOverviewBinding
-import com.danshima.savemyq.databinding.GridViewItemBinding
+import com.danshima.savemyq.di.Injectable
+import com.danshima.savemyq.common.ItemDecoration
+import com.danshima.savemyq.common.provideViewModel
+import com.danshima.savemyq.model.Resource
+
+import javax.inject.Inject
 
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : Fragment(), Injectable {
 
-    private val viewModel: OverviewViewModel by lazy {
-        ViewModelProviders.of(this).get(OverviewViewModel::class.java)
-    }
-    private lateinit var adapter: GoalListAdapter
+    private lateinit var binding: FragmentOverviewBinding
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    /**
-     * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
-     * to enable Data Binding to observe LiveData, and sets up the RecyclerView with an adapter.
-     */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val binding = FragmentOverviewBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-        binding.toolbar.title = getString(R.string.toolbar_name)
-        (activity as AppCompatActivity).apply {
-            setSupportActionBar(binding.toolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setHomeButtonEnabled(true)
-        }
+    lateinit var viewModel: OverviewViewModel
+
+    private lateinit var adapter: OverviewAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        viewModel = provideViewModel(viewModelFactory)
+
+        binding = FragmentOverviewBinding.inflate(inflater, container, false)
+        binding.toolbar.title = "Goals"
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
+
+        adapter = OverviewAdapter(this)
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(
+            ItemDecoration(
+                resources.getDimension(
+                    R.dimen.standard16
+                ).toInt()
+            )
+        )
+
+        binding.refresh.setOnRefreshListener {
+            viewModel.fetchGoals(true)
+        }
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        viewModel.savingGoals.observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Resource.Success -> {
+                    binding.refresh.isRefreshing = false
+                    adapter.submitList(result.value)
+                    adapter.notifyDataSetChanged()
+                }
+                is Resource.Error -> binding.refresh.isRefreshing = false
+                is Resource.Loading -> binding.refresh.isRefreshing = true
+            }
+        })
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.fetchData()
+    }
 }

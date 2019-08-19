@@ -1,11 +1,12 @@
-package com.danshima.savemyq.data.dao
+package com.danshima.savemyq.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.danshima.savemyq.data.Feed
+import com.danshima.savemyq.model.Feed
+
 
 @Dao
 interface FeedDao {
@@ -15,7 +16,6 @@ interface FeedDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFeeds(feeds: List<Feed>)
 
-    @Query("SELECT * FROM feed_table WHERE userId = :id")
+    @Query("SELECT * FROM feed WHERE UserId = :id")
     fun findFeedById(id: Int): LiveData<List<Feed>>
-
 }
