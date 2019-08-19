@@ -6,27 +6,30 @@
     <data>
         <variable
             name="goal"
-            type="com.danshima.savemyq.data.SavingGoal" />
+            type="com.danshima.savemyq.model.SavingsGoal" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp">
+        android:layout_margin="@dimen/standard4"
+        app:cardCornerRadius="2dp"
+        android:onClick="@{clickListener}"
+        app:cardElevation="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:orientation="vertical">
+            android:layout_height="224dp">
 
             <ImageView
             android:id="@+id/goal_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:imageUrl="@{goal.url}"
-            android:contentDescription="@null"
+            app:imageFromUrl="@{goal.goalImageURL}"
+            android:contentDescription="@{goal.name}"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +41,8 @@
                 android:id="@+id/goal_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:padding="@dimen/standard16"
                 android:text="@{goal.name}"
-                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toTopOf="@+id/goal_amount"
@@ -52,13 +54,12 @@
                 android:id="@+id/goal_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:padding="@dimen/standard16"
+                app:setGoalText="@{goal}"
                 android:textSize="14sp"
-                android:text="@{goal.targetAmount == null ? @string/null_target(goal.currentBalance)
-                : @string/out_of_total(goal.currentBalance, goal.targetAmount) }"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="$1 of 1000"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 </layout>

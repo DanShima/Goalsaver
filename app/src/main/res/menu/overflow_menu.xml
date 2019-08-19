@@ -3,5 +3,5 @@
     <item
         android:id="@+id/action_edit"
         android:icon="@drawable/ic_edit"
-        android:title="@string/action_edit" app:showAsAction="always"/>
+        android:title="@string/edit_detail" app:showAsAction="always"/>
 </menu>

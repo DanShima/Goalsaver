@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="feed" type="com.danshima.savemyq.data.Feed"/>
+        <variable name="feed" type="com.danshima.savemyq.model.Feed"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

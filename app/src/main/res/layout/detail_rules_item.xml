@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="goal" type="com.danshima.savemyq.data.SavingGoal"/>
+        <variable name="goal" type="com.danshima.savemyq.model.SavingsGoal"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,13 +31,13 @@
             android:id="@+id/goal_progress_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/standard16"
+            android:layout_marginBottom="@dimen/standard8"
             android:textSize="20sp"
             android:textColor="@color/colorBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/goal_title"
-            app:setProgressText="@{goal}"
+            app:setGoalText="@{goal}"
             tools:text="$1,234 of $4,000"/>
 
 
