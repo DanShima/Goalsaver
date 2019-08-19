@@ -35,19 +35,19 @@ class OverviewViewModel @Inject constructor(private val repository: Repository) 
     }
 
     val savingRules: LiveData<Resource<List<SavingsRule>>> = Transformations.switchMap(_triggerFetchRules) {
-        repository.fetchSavingRules(it)
+        repository.getRules(it)
     }
 
     val savingGoals: LiveData<Resource<List<SavingsGoal>>> = Transformations.switchMap(_triggerFetchGoals) {
         if (it is Boolean && it) {
-            repository.fetchSavingsGoal(true)
+            repository.getGoals(true)
         } else {
-            repository.fetchSavingsGoal()
+            repository.getGoals()
         }
     }
 
     val feed: LiveData<Resource<List<Feed>>> = Transformations.switchMap(_fetchFeed) {
-        repository.fetchSavingsGoalsFeed(it.first, it.second)
+        repository.getFeeds(it.first, it.second)
     }
 
     override fun onCleared() {
