@@ -1,4 +1,4 @@
-# Goalsaver
+# Goalsaver (work in progress)
 
  A simple app that shows a list of savings goals and details of each goal.
  
