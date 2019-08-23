@@ -88,7 +88,6 @@ class Repository @Inject constructor(
 
     fun getFeeds(id: Int, forceReload: Boolean = false): LiveData<Resource<List<Feed>>> {
         return object : NetworkBoundResource<List<Feed>, FeedEntity>(appExecutors) {
-            @RequiresApi(Build.VERSION_CODES.N)
             override fun saveCallResult(item: FeedEntity) {
                 item.feed.forEach {
                     it.userId = id
@@ -117,6 +116,8 @@ class Repository @Inject constructor(
     }
 
     fun clear() {
-        compositeDisposable.dispose()
+        // Using clear will clear all, but can accept new disposable
+        // Using dispose will clear all and set isDisposed = true, so it will not accept any new disposable
+        compositeDisposable.clear()
     }
 }

@@ -7,12 +7,8 @@ import com.danshima.savemyq.model.SavingsGoal
 import com.danshima.savemyq.model.SavingsRule
 
 
-
-/**
- * Main database description.
- */
 @Database(
-    entities = [SavingsRule::class, Feed::class, SavingsGoal::class], version = 2, exportSchema = false
+    entities = [SavingsRule::class, Feed::class, SavingsGoal::class], version = 3, exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun feedDao(): FeedDao

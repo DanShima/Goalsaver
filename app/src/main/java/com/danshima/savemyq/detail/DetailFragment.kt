@@ -73,13 +73,11 @@ class DetailFragment : Fragment(), Injectable {
             when (result) {
                 is Resource.Success -> {
                     binding.swipeRefresh.isRefreshing = false
-                    result.value.let {
-                        if (it.isNotEmpty()) {
-                            if (args.goal.id == result.value[0].userId) {
-                                adapter.submitList(result.value)
-                            }
-                            updateSubHeader(result.value)
+                    if (result.value.isNotEmpty()) {
+                        if (args.goal.id == result.value[0].userId) {
+                            adapter.submitList(result.value)
                         }
+                        updateSubHeader(result.value)
                     }
                 }
                 is Resource.Loading -> binding.swipeRefresh.isRefreshing = true
