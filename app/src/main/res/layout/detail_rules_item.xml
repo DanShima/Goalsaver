@@ -13,12 +13,11 @@
         android:layout_height="wrap_content"
         tools:background="@color/colorGrey">
 
-
         <TextView
             android:id="@+id/goal_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/standard16"
             android:text="@{goal.name}"
             android:textSize="30sp"
             android:textColor="@color/colorBackground"
@@ -46,7 +45,7 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/standard16"
             android:theme="@style/AppTheme.ProgressBar"
             app:bindProgressBarGoal="@{goal}"
             app:layout_constraintEnd_toEndOf="parent"

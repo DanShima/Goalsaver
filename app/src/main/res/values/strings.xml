@@ -7,4 +7,5 @@
     <string name="this_week">This week</string>
     <string name="add_action">Add something</string>
     <string name="rules">Your rules</string>
+    <string name="error">Something has gone wrong</string>
 </resources>

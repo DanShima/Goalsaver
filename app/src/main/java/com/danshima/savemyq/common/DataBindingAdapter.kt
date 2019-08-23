@@ -102,5 +102,5 @@ fun bindSavingRulesIcon(imageView: ImageView, savingsRule: SavingsRule) {
             R.drawable.ic_round_up
         }
     }
-    imageView.setImageDrawable(VectorDrawableCompat.create(imageView.resources, drawable, null))
+    imageView.setImageResource(drawable)
 }

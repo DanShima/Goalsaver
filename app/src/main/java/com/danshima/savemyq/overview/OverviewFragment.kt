@@ -22,12 +22,9 @@ import javax.inject.Inject
 class OverviewFragment : Fragment(), Injectable {
 
     private lateinit var binding: FragmentOverviewBinding
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
     lateinit var viewModel: OverviewViewModel
-
     private lateinit var adapter: OverviewAdapter
 
     override fun onCreateView(
@@ -35,23 +32,20 @@ class OverviewFragment : Fragment(), Injectable {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = provideViewModel(viewModelFactory)
-
         binding = FragmentOverviewBinding.inflate(inflater, container, false)
-        binding.toolbar.title = "Goals"
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setHomeButtonEnabled(true)
-
         adapter = OverviewAdapter(this)
+
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(binding.toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setHomeButtonEnabled(true)
+        }
+
+        binding.toolbar.title = "Goals"
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(
-            ItemDecoration(
-                resources.getDimension(
-                    R.dimen.standard16
-                ).toInt()
-            )
+            ItemDecoration(resources.getDimension(R.dimen.standard16).toInt())
         )
-
         binding.refresh.setOnRefreshListener {
             viewModel.fetchGoals(true)
         }
@@ -74,8 +68,8 @@ class OverviewFragment : Fragment(), Injectable {
         })
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         viewModel.fetchData()
     }
 }

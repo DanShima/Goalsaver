@@ -3,7 +3,10 @@ package com.danshima.savemyq.overview
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -21,15 +24,19 @@ class OverviewAdapter(private val context: Fragment) : ListAdapter<SavingsGoal, 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val goal = getItem(position)
         holder.apply {
-            bind(createOnClickListener(goal), goal)
+            bind(createOnClickListener(binding.goalImage, binding.goalName, goal), goal)
             itemView.tag = goal
         }
     }
 
-    private fun createOnClickListener(goal: SavingsGoal): View.OnClickListener {
+    private fun createOnClickListener(imageView: ImageView, title: TextView, goal: SavingsGoal): View.OnClickListener {
         return View.OnClickListener {
             val direction = OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(goal)
-            context.findNavController().navigate(direction)
+            val extras = FragmentNavigatorExtras(
+                imageView to "imageView",
+                title to "titleTextView"
+            )
+            context.findNavController().navigate(direction, extras)
         }
     }
 

@@ -3,4 +3,6 @@
     <dimen name="standard16">16dp</dimen>
     <dimen name="standard8">8dp</dimen>
     <dimen name="standard4">4dp</dimen>
+    <dimen name="rule_icon_size">40dp</dimen>
+    <dimen name="rule_header_height">48dp</dimen>
 </resources>

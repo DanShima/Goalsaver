@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.danshima.savemyq.databinding.DetailViewItemBinding
 import com.danshima.savemyq.model.Feed
 
-class DetailAdapter : ListAdapter<Feed, DetailAdapter.ViewHolder>(FeedDiffCallback()) {
-
+class DetailAdapter : ListAdapter<Feed, DetailAdapter.ViewHolder>(
+    object : DiffUtil.ItemCallback<Feed>() {
+        override fun areItemsTheSame(oldItem: Feed, newItem: Feed): Boolean = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: Feed, newItem: Feed): Boolean = oldItem == newItem
+    }
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            DetailViewItemBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
+        return ViewHolder(DetailViewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -25,31 +26,16 @@ class DetailAdapter : ListAdapter<Feed, DetailAdapter.ViewHolder>(FeedDiffCallba
             bind(feed)
             itemView.tag = feed
         }
-
     }
 
-
     class ViewHolder(val binding: DetailViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: Feed) {
             binding.apply {
                 feed = item
                 executePendingBindings()
             }
         }
-
     }
-
 }
 
 
-private class FeedDiffCallback : DiffUtil.ItemCallback<Feed>() {
-    override fun areItemsTheSame(oldItem: Feed, newItem: Feed): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Feed, newItem: Feed): Boolean {
-        return oldItem == newItem
-    }
-
-}

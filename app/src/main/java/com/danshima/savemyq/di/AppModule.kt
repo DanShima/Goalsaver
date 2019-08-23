@@ -33,10 +33,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
-
 
 @Module(includes = [ViewModelModule::class])
 class AppModule {
@@ -82,5 +80,4 @@ class AppModule {
     fun provideSavingsGoalDao(db: AppDatabase): SavingsGoalDao {
         return db.savingsGoalDao()
     }
-
 }
