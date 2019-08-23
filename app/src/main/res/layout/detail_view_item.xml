@@ -17,9 +17,9 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="?android:attr/textColorPrimary"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="@dimen/standard8"
+            android:layout_marginTop="@dimen/standard16"
+            android:layout_marginStart="@dimen/standard16"
             app:bindHtmlString="@{feed.message}"
             app:fontFamily="BentonSans-Regular"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,11 +30,11 @@
 
         <ImageView
             android:id="@+id/feed_icon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="@dimen/standard16"
+            android:layout_height="@dimen/standard16"
             tools:src="@drawable/ic_round_up"
             tools:background="@color/colorBackground"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/standard16"
             app:layout_constraintTop_toTopOf="@+id/feed_timestamp"
             app:layout_constraintStart_toStartOf="@+id/feed_title"
             app:layout_constraintBottom_toBottomOf="@+id/feed_timestamp"
@@ -48,12 +48,11 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="?android:attr/textColorSecondary"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/standard8"
             app:layout_constraintTop_toBottomOf="@+id/feed_title"
             app:layout_constraintStart_toEndOf="@+id/feed_icon"
             app:bindTimestamp="@{feed.timestamp}"
-            tools:text="2h ago"
-            android:layout_marginTop="8dp"/>
+            tools:text="2h ago"/>
 
         <ImageView
             android:id="@+id/dot"
@@ -74,6 +73,7 @@
             android:textColor="?android:attr/textColorSecondary"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:text="@{feed.type}"
             tools:text="$56.60 Best Buy"
             app:layout_constraintStart_toEndOf="@+id/dot"
             app:layout_constraintTop_toBottomOf="@+id/feed_title"/>
@@ -85,7 +85,7 @@
             android:textSize="18sp"
             android:textColor="@color/colorGreen"
             android:gravity="end"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/standard16"
             app:bindAmount="@{feed.amount}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

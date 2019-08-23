@@ -1,7 +1,9 @@
 package com.danshima.savemyq.common
 
+import android.annotation.TargetApi
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -14,8 +16,10 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.danshima.savemyq.R
 import com.danshima.savemyq.model.SavingsGoal
 import com.danshima.savemyq.model.SavingsRule
+import java.text.DateFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.Instant
 import java.util.*
 
 
@@ -71,9 +75,12 @@ fun bindProgressBarGoal(progressBar: ProgressBar, goal: SavingsGoal) {
     }
 }
 
+@TargetApi(Build.VERSION_CODES.O)
 @BindingAdapter("bindTimestamp")
 fun bindTimestamp(textView: TextView, timestamp: String) {
-    textView.text = SimpleDateFormat(timestamp, Locale.US).toString()
+    //TODO: make better display
+    val formatter: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+    textView.text = formatter.parse(timestamp)?.toString()
 }
 
 @BindingAdapter("bindFeedIcon")
