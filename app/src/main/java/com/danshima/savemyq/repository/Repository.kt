@@ -56,8 +56,6 @@ class Repository @Inject constructor(
             }
 
         }.asLiveData()
-
-
     }
 
     fun getGoals(forceReload: Boolean = false): LiveData<Resource<List<SavingsGoal>>> {

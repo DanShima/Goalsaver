@@ -15,7 +15,8 @@ import com.danshima.savemyq.databinding.GridViewItemBinding
 import com.danshima.savemyq.model.SavingsGoal
 
 
-class OverviewAdapter(private val context: Fragment) : ListAdapter<SavingsGoal, OverviewAdapter.ViewHolder>(GoalDiffCallback()) {
+class OverviewAdapter(private val context: Fragment) :
+    ListAdapter<SavingsGoal, OverviewAdapter.ViewHolder>(GoalDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(GridViewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
